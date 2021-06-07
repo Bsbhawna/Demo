@@ -31,7 +31,7 @@ pipeline {
                 }
                  stage('Integration Test') {
                      agent {
-                         Maven_Slave {
+                         any {
                              reuseNode false
                              image 'ubuntu'
                          }
