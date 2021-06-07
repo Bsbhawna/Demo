@@ -7,15 +7,38 @@ pipeline {
                 echo 'Building..'
             }
         }
-        stage('Test') {
+        stage('Two') {
             steps {
-                echo 'Testing..'
+                input ('Do you want to proceed?')
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage('Three') {
+            when {
+                not {
+                    branch "master"
+                }
             }
+            steps {
+                echo 'Hello....'
+            }
+        }
+        stage('Four') {
+            parallel {
+                stage('Unit Test') {
+                    steps {
+                        echo 'Running the unit test'
+                    }
+                }
+                 stage('Integration Test') {
+                     agent {
+                         docker {
+                             reuseNode false
+                             image 'ubuntu'
+                         }
+                     }
+            steps {
+                echo 'Running the integration test....'
+            }   
         }
     }
 }
