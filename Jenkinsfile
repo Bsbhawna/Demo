@@ -38,8 +38,12 @@ pipeline {
                      }
             steps {
                 echo 'Running the integration test....'
+            }
+                 }
+            }
+        }
             }   
         }
     }
 }
-    }
+    
